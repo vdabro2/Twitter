@@ -13,7 +13,10 @@
         app:counterEnabled="true"
         app:counterMaxLength="280"
         app:counterOverflowTextAppearance="@style/counterOverride"
-        app:counterTextAppearance="@style/counterText">
+        app:counterTextAppearance="@style/counterText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/etCompose"
