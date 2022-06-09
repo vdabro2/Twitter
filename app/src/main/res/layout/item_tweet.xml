@@ -47,10 +47,10 @@
         android:id="@+id/ivEmb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
 
+        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
         app:layout_constraintTop_toBottomOf="@+id/tvBody"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -83,24 +83,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/tbHeart"
+        android:id="@+id/ibHeart"
         android:layout_width="30dp"
         android:layout_height="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         android:background="#FBFBFB"
-        android:scaleX="2"
-        android:scaleY="2"
-        android:src="@drawable/ic_vector_heart_stroke"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivEmb" />
 
     <ImageButton
         android:id="@+id/ibRetweet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="22dp"
+        android:layout_height="19dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
@@ -108,14 +106,14 @@
         android:background="#FBFBFB"
         android:src="@drawable/ic_vector_retweet_stroke"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tbHeart"
+        app:layout_constraintEnd_toStartOf="@+id/ibHeart"
         app:layout_constraintStart_toStartOf="@+id/ivEmb"
         app:layout_constraintTop_toBottomOf="@+id/ivEmb" />
 
     <ImageButton
         android:id="@+id/ibReply"
-        android:layout_width="24dp"
-        android:layout_height="25dp"
+        android:layout_width="18dp"
+        android:layout_height="16dp"
         android:layout_marginTop="5dp"
         android:background="#FBFBFB"
         android:scaleType="fitXY"

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codepath.apps.restclienttemplate.models.Profile;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
@@ -53,6 +54,29 @@ public class ComposeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // show user info
+        twitterClient.getUserInfo(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                // Remember to CLEAR OUT old items before appending in the new ones
+                try {
+                    // use json to create user and user id info
+                    // display in tv and tv and profile pic
+                    Profile profile = Profile.fromJson(json.jsonObject);
+                    tvName.setText(profile.name);
+                    tvScreenName.setText(profile.username);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.d("DEBUG", "Fetch timeline error: " + throwable.toString());
+            }
+
+        });
         btnTweet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +89,8 @@ public class ComposeActivity extends AppCompatActivity {
                     Toast.makeText(ComposeActivity.this, "Your tweet is too long",Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+
                 Toast.makeText(ComposeActivity.this, tweetContent,Toast.LENGTH_SHORT).show();
                 twitterClient.publishTweet(tweetContent, new JsonHttpResponseHandler() {
                     @Override

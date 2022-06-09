@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,11 +9,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".LoginActivity" >
 
+    <ImageView
+        android:id="@+id/ivTwitter"
+        android:layout_width="382dp"
+        android:layout_height="461dp"
+        android:layout_below="@+id/bLogin"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:layout_marginBottom="48dp"
+        app:srcCompat="@drawable/ic_launcher_twitter"
+        tools:srcCompat="@drawable/ic_launcher_twitter" />
+
     <Button
+        android:id="@+id/bLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
         android:onClick="loginToRest"
         android:text="@string/login_label" />
 
