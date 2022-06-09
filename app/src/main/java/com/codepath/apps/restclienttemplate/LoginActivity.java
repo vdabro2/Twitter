@@ -22,6 +22,7 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 
 		final SampleModel sampleModel = new SampleModel();
 		sampleModel.setName("CodePath");
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 		sampleModelDao = ((TwitterApp) getApplicationContext()).getMyDatabase().sampleModelDao();
 
@@ -31,6 +32,7 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 				sampleModelDao.insertModel(sampleModel);
 			}
 		});
+
 	}
 
 

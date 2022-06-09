@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.apps.restclienttemplate.models.User;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
@@ -49,6 +50,8 @@ public class TimelineActivity extends AppCompatActivity {
          rvTweets.setLayoutManager(new LinearLayoutManager(this));
          rvTweets.setAdapter(adapter);
          populateHomeTimeline();
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -126,6 +129,8 @@ public class TimelineActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.compose) {
             Intent intent = new Intent(this, ComposeActivity.class);
+            User user = new User();
+            //intent.putExtra("the user", );
             startActivityForResult(intent, REQUEST_CODE);
             return true;
         }

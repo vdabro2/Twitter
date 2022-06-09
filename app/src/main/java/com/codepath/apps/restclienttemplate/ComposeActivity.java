@@ -3,12 +3,16 @@ package com.codepath.apps.restclienttemplate;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -24,18 +28,35 @@ public class ComposeActivity extends AppCompatActivity {
     public static final int max = 280;
     public static final String TAG = "ComposeActivity";
     Button btnTweet;
+    ImageButton ibExit;
     TwitterClient twitterClient;
+    ImageView ivProfileImage;
+    TextView tvName;
+    TextView tvScreenName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
         twitterClient = TwitterApp.getRestClient(this);
         etCompose = findViewById(R.id.etCompose);
+        ibExit = findViewById(R.id.ibExit);
         btnTweet = findViewById(R.id.btnTweet);
+        ivProfileImage = findViewById(R.id.ivProfileImage2);
+        tvScreenName = findViewById(R.id.tvScreenName2);
+        tvName = findViewById(R.id.tvName2);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        ibExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ComposeActivity.this, TimelineActivity.class);
+                startActivity(intent);
+            }
+        });
         btnTweet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btnTweet.setBackgroundColor(Color.BLACK);
                 String tweetContent = etCompose.getText().toString();
                 if (tweetContent.isEmpty()) {
                     Toast.makeText(ComposeActivity.this, "Your tweet cannot be empty",Toast.LENGTH_SHORT).show();

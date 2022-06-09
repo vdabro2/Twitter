@@ -5,7 +5,11 @@
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
         -->
+        <item name="colorPrimary">#801da1f2</item>
+        <item name="android:icon">@drawable/ic_launcher_twitter</item>
+
     </style>
 
     <!-- Application theme. -->
@@ -20,5 +24,7 @@
     <style name="counterOverride">
         <item name="android:textColor">#ff0000</item>
     </style>
-
+    <style name="Button.Blue" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">#801da1f2</item>
+    </style>
 </resources>

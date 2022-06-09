@@ -6,6 +6,67 @@
     android:layout_height="match_parent"
     tools:context=".ComposeActivity">
 
+    <TextView
+        android:id="@+id/tvScreenName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:text="TextView"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toStartOf="@+id/ivProfileImage2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="4dp"
+        android:text="TextView"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toStartOf="@+id/ivProfileImage2"
+        app:layout_constraintTop_toBottomOf="@+id/tvScreenName2" />
+
+    <ImageView
+        android:id="@+id/ivProfileImage2"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btnTweet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:backgroundTint="@color/twitter_blue_50"
+        android:shadowColor="@color/twitter_blue_50"
+        android:text="Tweet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+    <ImageButton
+        android:id="@+id/ibExit"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="5dp"
+        android:background="#FBFBFB"
+        android:backgroundTint="#FFFFFF"
+        android:scaleType="fitXY"
+
+        android:src="@drawable/ic_vector_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
@@ -15,34 +76,26 @@
         app:counterOverflowTextAppearance="@style/counterOverride"
         app:counterTextAppearance="@style/counterText"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/ibExit">
 
         <EditText
             android:id="@+id/etCompose"
             android:layout_width="401dp"
             android:layout_height="119dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginTop="50dp"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="Whats Happening?"
+            android:hint="What's happening?"
             android:inputType="textMultiLine"
             android:minLines="5"
             app:counterEnabled="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="-1dp" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnTweet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:text="Tweet"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
