@@ -70,6 +70,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         ImageView embedded;
         TextView tvBody;
         ImageButton ibHeart;
+        ImageButton ibRetweet;
         TwitterClient client;
         TextView tvName;
         TextView tvScreenName;
@@ -83,6 +84,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvRelativeTime = itemView.findViewById(R.id.tvRelativeTime);
             tvName = itemView.findViewById(R.id.tvName);
             ibHeart = itemView.findViewById(R.id.ibHeart);
+            ibRetweet = itemView.findViewById(R.id.ibRetweet);
         }
 
         public void bind(Tweet tweet) {
@@ -142,6 +144,41 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
                 }
             });
+
+            // retweet
+            ibRetweet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (tweet.retweeted == true) {
+                        tweet.retweeted = false;
+                        client.postUnRetweet(tweet.tweetId, new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Headers headers, JSON json) {
+
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+
+                            }
+                        });
+                    } else {
+                        tweet.retweeted = true;
+                        client.postRetweet(tweet.tweetId, new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Headers headers, JSON json) {
+
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+
+                            }
+                        });
+                    }
+                }
+            });
+
 
         }
 
