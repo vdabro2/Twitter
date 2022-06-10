@@ -1,5 +1,11 @@
 # RestClientTemplate [![Build Status](https://travis-ci.org/codepath/android-rest-client-template.svg?branch=master)](https://travis-ci.org/codepath/android-rest-client-template)
 
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+<img src='/twitterre.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 ## Overview
 
 RestClientTemplate is a skeleton Android project that makes writing Android apps sourced from OAuth JSON REST APIs as easy as possible. This skeleton project
