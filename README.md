@@ -2,9 +2,9 @@
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
+Here's a walkthrough:
 
-<img src='/twitterre.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='/twitterrec.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ## Overview
 
