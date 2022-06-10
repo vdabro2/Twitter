@@ -45,11 +45,11 @@
 
     <ImageView
         android:id="@+id/ivEmb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
+        android:layout_width="153dp"
+        android:layout_height="92dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
         app:layout_constraintTop_toBottomOf="@+id/tvBody"
         tools:srcCompat="@tools:sample/avatars" />
@@ -84,16 +84,17 @@
 
     <ImageButton
         android:id="@+id/ibHeart"
-        android:layout_width="30dp"
-        android:layout_height="20dp"
+        android:layout_width="24dp"
+        android:layout_height="18dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        android:background="#FBFBFB"
 
+        android:background="#FBFBFB"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivEmb" />
+        app:layout_constraintEnd_toStartOf="@+id/likeCount"
+        app:layout_constraintTop_toBottomOf="@+id/ivEmb"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/ibRetweet"
@@ -104,7 +105,6 @@
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         android:background="#FBFBFB"
-        android:src="@drawable/ic_vector_retweet_stroke"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ibHeart"
         app:layout_constraintStart_toStartOf="@+id/ivEmb"
@@ -112,8 +112,8 @@
 
     <ImageButton
         android:id="@+id/ibReply"
-        android:layout_width="18dp"
-        android:layout_height="16dp"
+        android:layout_width="23dp"
+        android:layout_height="22dp"
         android:layout_marginTop="5dp"
         android:background="#FBFBFB"
         android:scaleType="fitXY"
@@ -122,6 +122,28 @@
         android:src="@drawable/reply_button"
         app:layout_constraintStart_toStartOf="@+id/ivEmb"
         app:layout_constraintTop_toBottomOf="@+id/ivEmb" />
+
+    <TextView
+        android:id="@+id/retweetCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:text="TextView"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/ibRetweet"
+        app:layout_constraintTop_toTopOf="@+id/ibRetweet" />
+
+    <TextView
+        android:id="@+id/likeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="5dp"
+        android:text="TextView"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ibHeart" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

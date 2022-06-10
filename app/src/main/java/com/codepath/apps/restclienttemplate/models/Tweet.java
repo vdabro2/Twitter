@@ -18,6 +18,9 @@ public class Tweet {
     public Entity entity;
     public boolean wasLiked;
     public boolean retweeted;
+    public int likeCount;
+
+    public int retweetCount;
     public  Tweet(){}
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
@@ -33,6 +36,8 @@ public class Tweet {
         }
         tweet.wasLiked = jsonObject.getBoolean("favorited");
         tweet.retweeted = jsonObject.getBoolean("retweeted");
+        tweet.likeCount= jsonObject.getInt("favorite_count");
+        tweet.retweetCount = jsonObject.getInt("retweet_count");
         return tweet;
     }
     public static List<Tweet> fromJsonArray(JSONArray jsonArray) throws JSONException{

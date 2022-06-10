@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"><![CDATA[
 
     />
+
     ]]><item
         android:id="@+id/compose"
         android:icon="@drawable/vector_compose_fab"

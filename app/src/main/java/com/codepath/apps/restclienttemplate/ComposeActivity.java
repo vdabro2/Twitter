@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Profile;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -43,9 +44,9 @@ public class ComposeActivity extends AppCompatActivity {
         ibExit = findViewById(R.id.ibExit);
         btnTweet = findViewById(R.id.btnTweet);
         ivProfileImage = findViewById(R.id.ivProfileImage2);
-        tvScreenName = findViewById(R.id.tvScreenName2);
-        tvName = findViewById(R.id.tvName2);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        tvScreenName = findViewById(R.id.tvName2);
+        tvName = findViewById(R.id.tvScreenName2);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         ibExit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,8 +64,9 @@ public class ComposeActivity extends AppCompatActivity {
                     // use json to create user and user id info
                     // display in tv and tv and profile pic
                     Profile profile = Profile.fromJson(json.jsonObject);
-                    tvName.setText(profile.name);
-                    tvScreenName.setText(profile.username);
+                    tvName.setText("@" + profile.username);
+                    tvScreenName.setText(profile.name);
+                    Glide.with(ComposeActivity.this).load(profile.image).transform(new RoundedCorners(80)).into(ivProfileImage);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

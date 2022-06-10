@@ -1,6 +1,8 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.text.format.DateUtils;
 import android.util.JsonReader;
 import android.util.Log;
@@ -18,7 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.apps.restclienttemplate.models.User;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+
+import org.parceler.Parcels;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,6 +37,7 @@ import okhttp3.Headers;
 public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder>{
     List<Tweet> tweets;
     Context context;
+    private static final int REQUEST_CODE = 20;
 
     public TweetsAdapter(Context context,List<Tweet> tweets) {
         this.context = context;
@@ -68,6 +74,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivProfileImage;
         ImageView embedded;
+        ImageButton ibReply;
         TextView tvBody;
         ImageButton ibHeart;
         ImageButton ibRetweet;
@@ -75,6 +82,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         TextView tvName;
         TextView tvScreenName;
         TextView tvRelativeTime;
+        TextView likeCount;
+        TextView retweetCount;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             client = TwitterApp.getRestClient(context); //??????
@@ -85,13 +94,23 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvName = itemView.findViewById(R.id.tvName);
             ibHeart = itemView.findViewById(R.id.ibHeart);
             ibRetweet = itemView.findViewById(R.id.ibRetweet);
+            ibReply = itemView.findViewById(R.id.ibReply);
+            likeCount = itemView.findViewById(R.id.likeCount);
+            retweetCount = itemView.findViewById(R.id.retweetCount);
         }
 
         public void bind(Tweet tweet) {
             tvBody.setText(tweet.body);
             tvScreenName.setText("@" + tweet.user.screenName);
             tvName.setText(tweet.user.name);
-
+            likeCount.setText(Integer.toString(tweet.likeCount));
+            retweetCount.setText(Integer.toString(tweet.retweetCount));
+            if (tweet.likeCount == 0) {
+                likeCount.setText("");
+            }
+            if (tweet.retweetCount == 0) {
+                retweetCount.setText("");
+            }
             if (tweet.user.profileImageUrl != null && tweet.user.profileImageUrl != "" && tweet.user.profileImageUrl != "http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png")
                 Glide.with(context).load(tweet.user.profileImageUrl).transform(new RoundedCorners(80)).into(ivProfileImage);
             if (tweet.entity != null && tweet.entity.imageURL != "") {
@@ -102,7 +121,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             String relative_time = getRelativeTimeAgo(tweet.createdAt);
             tvRelativeTime.setText(relative_time);
             if (tweet.wasLiked == true) {
-                ibHeart.setBackgroundResource(R.drawable.ic_vector_heart);
+                ibHeart.setBackgroundResource(R.drawable.red_heart);
             } else {
                 ibHeart.setBackgroundResource(R.drawable.ic_vector_heart_stroke);
             }
@@ -114,7 +133,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                             @Override
                             public void onSuccess(int statusCode, Headers headers, JSON json) {
 
-                                ibHeart.setBackgroundResource(R.drawable.ic_vector_heart);
+                                ibHeart.setBackgroundResource(R.drawable.red_heart);
                                 tweet.wasLiked = true;
 
                                 // change button color
@@ -146,15 +165,25 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             });
 
             // retweet
+            if (tweet.retweeted == true) {
+                //ibRetweet.setBackgroundColor(Color.GREEN);
+                ibRetweet.setBackgroundResource(R.drawable.ic_vector_retweet_green);
+            } else {
+                //ibRetweet.setBackgroundColor(Color.WHITE);
+                ibRetweet.setBackgroundResource(R.drawable.ic_vector_retweet_stroke);
+            }
             ibRetweet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (tweet.retweeted == true) {
-                        tweet.retweeted = false;
                         client.postUnRetweet(tweet.tweetId, new JsonHttpResponseHandler() {
                             @Override
                             public void onSuccess(int statusCode, Headers headers, JSON json) {
-
+                                tweet.retweeted = false;
+                                tweet.retweetCount = tweet.retweetCount - 1;
+                                //retweetCount.setText(tweet.retweetCount);
+                                //ibRetweet.setBackgroundColor(Color.WHITE);
+                                ibRetweet.setBackgroundResource(R.drawable.ic_vector_retweet_stroke);
                             }
 
                             @Override
@@ -163,11 +192,16 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                             }
                         });
                     } else {
-                        tweet.retweeted = true;
+
                         client.postRetweet(tweet.tweetId, new JsonHttpResponseHandler() {
                             @Override
                             public void onSuccess(int statusCode, Headers headers, JSON json) {
-
+                                tweet.retweeted = true;
+                                ibRetweet.setBackgroundResource(R.drawable.ic_vector_retweet_green);
+                                tweet.retweetCount = tweet.retweetCount + 1;
+                                //retweetCount.setText(tweet.retweetCount);
+                                //ibRetweet.setBackgroundColor(Color.GREEN);
+                                //ibRetweet.setBackgroundTintList(Color.GREEN);
                             }
 
                             @Override
@@ -179,6 +213,16 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 }
             });
 
+            //replying
+            ibReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ReplyActivity.class);
+                    intent.putExtra("tweet", Parcels.wrap(tweet));
+                    context.startActivity(intent);
+
+                }
+            });
 
         }
 
